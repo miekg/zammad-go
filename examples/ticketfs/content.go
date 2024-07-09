@@ -36,7 +36,7 @@ func (f *File) ArticleContent() ([]byte, error) {
 }
 
 func (f *File) TagContent() ([]byte, error) {
-	ta, err := f.z.TagList(f.Ticket.ID)
+	ta, err := f.z.TicketTagByTicket(f.Ticket.ID)
 	if err != nil {
 		return nil, err
 	}
@@ -49,10 +49,8 @@ func (f *File) TagContent() ([]byte, error) {
 }
 
 func ArticleWrite(t zammad.Ticket, req *fuse.WriteRequest) zammad.TicketArticle {
-	id := UID(req.Uid)
-	if id == 0 {
-		id = 10 // bram, dump default
-	}
+	id := req.Uid
+	// Use FromFunc here.
 
 	ta := zammad.TicketArticle{}
 	ta.TicketID = t.ID
@@ -60,8 +58,8 @@ func ArticleWrite(t zammad.Ticket, req *fuse.WriteRequest) zammad.TicketArticle 
 	ta.OriginByID = id
 	ta.Subject = "From ticketfs"
 	ta.SenderID = 2 // agent?
-	ta.UpdatedByID = id
-	ta.CreatedByID = id
+	ta.UpdatedByID = int(id)
+	ta.CreatedByID = int(id)
 	ta.Body = string(req.Data)
 	ta.Internal = true
 	ta.From = "ticketfs"

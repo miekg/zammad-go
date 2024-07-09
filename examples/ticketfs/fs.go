@@ -98,14 +98,8 @@ type Dir struct {
 
 func (d *Dir) Attr(ctx context.Context, a *fuse.Attr) error {
 	a.Mode = os.ModeDir | 0o775
-	a.Gid = Group[d.Ticket.GroupID]
-	if a.Gid == 0 {
-		a.Gid = 65534
-	}
-	a.Uid = User[d.Ticket.OwnerID]
-	if a.Uid == 0 {
-		a.Uid = 65534
-	}
+	a.Gid = uint32(d.Ticket.GroupID)
+	a.Uid = uint32(d.Ticket.OwnerID)
 	a.Size = 12
 	a.Atime = d.Ticket.LastContactAt
 	a.Mtime = d.Ticket.UpdatedAt
@@ -235,14 +229,8 @@ func (f *File) Attr(ctx context.Context, a *fuse.Attr) error {
 	if f.ReadOnly {
 		a.Mode = 0o444
 	}
-	a.Gid = Group[f.Ticket.GroupID]
-	if a.Gid == 0 {
-		a.Gid = 65534
-	}
-	a.Uid = User[f.Ticket.OwnerID]
-	if a.Uid == 0 {
-		a.Uid = 65534
-	}
+	a.Gid = uint32(f.Ticket.GroupID)
+	a.Uid = uint32(f.Ticket.OwnerID)
 	a.Atime = f.Ticket.LastContactAt
 	a.Mtime = f.Ticket.UpdatedAt
 	a.Ctime = f.Ticket.CreatedAt

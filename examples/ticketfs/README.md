@@ -24,10 +24,8 @@ And `ls -l` shows thus:
 * Name: `<ticket number>` (here 346)
 
 Chowning the directory to a different user assigns the ticket, chgrp sets the group. The
-users/groups are synced from zammad and then matched (as strings) against system users and group. To
-if a user has the 'name' and a system user of 'name' exist, the user ID of the system user is used
-in the filesystem. If no match is found the ID from zammad is used as-is. The same holds true for
-groups. Note that this data is retrieved on start up only.
+users/groups are synced from zammad and used as-is. If you ID in zammad is 10, this is the ID used
+(which may map to a different system user).
 
 In a ticket directory you see:
 
