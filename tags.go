@@ -30,11 +30,7 @@ func (c *Client) TagAdd(t Tag) error {
 		return err
 	}
 
-	if err = c.SendWithAuth(req, nil); err != nil {
-		return err
-	}
-
-	return nil
+	return c.SendWithAuth(req, nil)
 }
 
 func (c *Client) TagRemove(t Tag) error {
@@ -44,11 +40,7 @@ func (c *Client) TagRemove(t Tag) error {
 		return err
 	}
 
-	if err = c.SendWithAuth(req, nil); err != nil {
-		return err
-	}
-
-	return nil
+	return c.SendWithAuth(req, nil)
 }
 
 func (c *Client) TagAdminList() ([]Tag, error) {
@@ -73,11 +65,7 @@ func (c *Client) TagAdminCreate(t Tag) error {
 		return err
 	}
 
-	if err = c.SendWithAuth(req, nil); err != nil {
-		return err
-	}
-
-	return nil
+	return c.SendWithAuth(req, nil)
 }
 
 func (c *Client) TagAdminRename(tagID int, t Tag) error {
@@ -87,11 +75,7 @@ func (c *Client) TagAdminRename(tagID int, t Tag) error {
 		return err
 	}
 
-	if err = c.SendWithAuth(req, nil); err != nil {
-		return err
-	}
-
-	return nil
+	return c.SendWithAuth(req, nil)
 }
 
 func (c *Client) TagAdminDelete(tagID int) error {
@@ -101,9 +85,5 @@ func (c *Client) TagAdminDelete(tagID int) error {
 		return err
 	}
 
-	if err = c.SendWithAuth(req, nil); err != nil {
-		return err
-	}
-
-	return nil
+	return c.SendWithAuth(req, nil)
 }

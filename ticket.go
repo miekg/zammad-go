@@ -127,9 +127,5 @@ func (c *Client) TicketDelete(ticketID int) error {
 		return err
 	}
 
-	if err = c.SendWithAuth(req, nil); err != nil {
-		return err
-	}
-
-	return nil
+	return c.SendWithAuth(req, nil)
 }
